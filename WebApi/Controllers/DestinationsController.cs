@@ -20,8 +20,11 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IEnumerable<Destination>> Get()
         {
+            
             return await dataProvider.GetDestinations();
+            
         }
+
 
         [HttpGet("{id}")]
         public async Task<Destination> Get(int id)
