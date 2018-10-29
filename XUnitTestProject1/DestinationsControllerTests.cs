@@ -17,11 +17,7 @@ namespace WebApiTestProject
         [Fact]
         public async Task test()
         {
-            ContentResult contentResult = new ContentResult();
-            var dest = new DestinationsController(_dataProvider);
-            await dest.Get();
-            contentResult.Content = _dataProvider.GetDestinations().ToString();
-            var statusCode = contentResult.StatusCode;
+            
         }
 
     }
