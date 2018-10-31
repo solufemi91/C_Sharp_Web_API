@@ -19,21 +19,7 @@ namespace WebApi
         {
 
             CreateWebHostBuilder(args).Build().Run();
-
-            var container = new WindsorContainer();
-
-            // Register the CompositionRoot type with the container
-            container.Register(Component.For<IDataProvider>().ImplementedBy<IDataProvider>());
-
-            // Resolve an object of type ICompositionRoot (ask the container for an instance)
-            // This is analagous to calling new() in a non-IoC application.
-            var root = container.Resolve<IDataProvider>();
-
-
-            // Wait for user input so they can check the program's output.
-            //Console.ReadLine();
-
-            
+           
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

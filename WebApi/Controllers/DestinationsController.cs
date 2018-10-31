@@ -18,12 +18,6 @@ namespace WebApi.Controllers
             _dataProvider = dataProvider;
         }
 
-        //private IDataProvider _dataProvider;
-
-        //public DestinationsController()
-        //{
-        //    _dataProvider = new DataProvider();
-        //}
 
         [HttpGet]
         public async Task<IEnumerable<Destination>> Get()
