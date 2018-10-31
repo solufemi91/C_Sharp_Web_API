@@ -9,7 +9,7 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class DestinationsController :Controller
+    public class DestinationsController : Controller 
     {
         private IDataProvider _dataProvider;
 

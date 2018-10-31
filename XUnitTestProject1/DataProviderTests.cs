@@ -4,46 +4,69 @@ using WebApi.Models;
 using System.Threading.Tasks;
 using System.Linq;
 using FluentAssertions;
+using Moq;
+using System.Collections.Generic;
 
 namespace WebApiTestProject
 {
     public class DataProviderTests
     {
-        private readonly DataProvider dataProvider = new DataProvider();
+
 
         [Fact]
-        public async Task GetAllDestinationsFromDatabaseAsync()
+
+        public void TestingGetDestinationsMethodReturnsACollectionOfDestinationObjects()
         {
-            var destinations = await dataProvider.GetDestinations();
-            destinations.Count().Should().Be(7, "this is the amount of records in the database's table");
+            var destinations = new List<Destination>
+            {
+               new Destination
+               {
+                   DestinationId = 1,
+                   Country = "England",
+                   City = "London"
+               },
+
+               new Destination
+               {
+                   DestinationId = 2 ,
+                   Country = "England",
+                   City = "Manchester"
+               },
+
+               new Destination
+               {
+                   DestinationId = 3 ,
+                   Country = "Spain",
+                   City = "Madrid"
+               },
+
+               new Destination
+               {
+                   DestinationId = 4 ,
+                   Country = "France",
+                   City = "Paris"
+               }
+            };
+
+            var mock = new Mock<IDataProvider>();
+            mock.Setup(x => x.GetDestinations()).ReturnsAsync(destinations.AsEnumerable());
         }
 
-        [Fact]
-        public async Task VerifyingThatTheCountryColumnDoesNotContainAnyBlanks()
-        {
-            var destinations = await dataProvider.GetDestinations();
-            destinations.All(d => d.Country != null).Should().BeTrue("the country column should not be blank");          
-        }
 
         [Fact]
-        public async Task VerifyingGetDestinationByIdReturnsTheCorrectObject()
-        {
-            var destination = await dataProvider.GetDestination(3);
-            destination.DestinationId.Should().Be(3, "this is the number that was supplied as an argument");
-            destination.City.Should().Be("Liverpool", "this is the city that corresponds with the number that was supplied as an argument");
-        }
 
-        [Fact]
-        public async Task AddANewDestination()
+        public void TestingGetDestinationMethodReturnsASingleDestinationObject()
         {
-            Destination destination = new Destination();
-            destination.DestinationId = 100;
-            destination.Country = "Legoland";
-            destination.City = "Block City";
-            await dataProvider.AddDestination(destination);
-            await dataProvider.GetDestination(100);
-            destination.DestinationId.Should().Be(100, "this is the number that was supplied as an argument");
-            destination.Country.Should().Be("Legoland", "this is the country that was supplied as an argument");
+
+            var destination = new Destination
+            {
+                DestinationId = 3,
+                Country = "Spain",
+                City = "Madrid"
+            };
+
+            var mock = new Mock<IDataProvider>();
+            mock.Setup(x => x.GetDestination(3)).ReturnsAsync(destination);
         }
 
 
