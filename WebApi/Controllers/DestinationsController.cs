@@ -5,23 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApi.Models;
 
+
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class DestinationsController :Controller
     {
-        private DataProvider dataProvider;
+        private IDataProvider _dataProvider;
 
-        public DestinationsController(DataProvider dataProvider)
+        public DestinationsController(IDataProvider dataProvider)
         {
-            this.dataProvider = dataProvider;
+            _dataProvider = dataProvider;
         }
+
+        //private IDataProvider _dataProvider;
+
+        //public DestinationsController()
+        //{
+        //    _dataProvider = new DataProvider();
+        //}
 
         [HttpGet]
         public async Task<IEnumerable<Destination>> Get()
         {
             
-            return await dataProvider.GetDestinations();
+            return await _dataProvider.GetDestinations();
             
         }
 
@@ -29,25 +37,25 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<Destination> Get(int id)
         {
-            return await dataProvider.GetDestination(id);
+            return await _dataProvider.GetDestination(id);
         }
 
         [HttpPost]
         public async Task Post([FromBody]Destination destination)
         {
-            await dataProvider.AddDestination(destination);
+            await _dataProvider.AddDestination(destination);
         }
 
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            await dataProvider.DeleteDestination(id);
+            await _dataProvider.DeleteDestination(id);
         }
 
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody]Destination destination)
         {
-            await dataProvider.UpdateDestination(id,destination);
+            await _dataProvider.UpdateDestination(id,destination);
         }
 
     }

@@ -12,13 +12,7 @@ namespace WebApiTestProject
     public class DestinationsControllerTests
     {
 
-        DataProvider _dataProvider = new DataProvider();
-
-        [Fact]
-        public async Task test()
-        {
-            
-        }
+      
 
     }
 }

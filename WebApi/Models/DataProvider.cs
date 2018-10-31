@@ -8,7 +8,7 @@ using Dapper;
 
 namespace WebApi.Models
 {
-    public class DataProvider 
+    public class DataProvider : IDataProvider
     {
 
         private readonly string connectionString = "Server=LAPTOP-G0AD0PCA\\MSSQLSERVER01;Database=HolidayDestinations;Trusted_Connection=True;";
