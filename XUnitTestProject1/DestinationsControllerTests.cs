@@ -15,7 +15,7 @@ namespace WebApiTestProject
     {
         [Fact]
 
-        public void TestGetOfControlller()
+        public void TestGetMethodReturnsCollectionOfDestinationObjects()
         {
             var destinations = new List<Destination>
             {
